@@ -20,6 +20,11 @@
       "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
       "inversedBy": "feeds"
+    },
+    "likesCount": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
     }
   }
 }
