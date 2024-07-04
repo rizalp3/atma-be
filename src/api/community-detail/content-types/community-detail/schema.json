@@ -1,0 +1,39 @@
+{
+  "kind": "singleType",
+  "collectionName": "community_details",
+  "info": {
+    "singularName": "community-detail",
+    "pluralName": "community-details",
+    "displayName": "Community Detail"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "subname": {
+      "type": "string"
+    },
+    "logo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "socialLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "additional.social-link"
+    }
+  }
+}
