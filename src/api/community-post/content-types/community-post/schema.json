@@ -47,6 +47,12 @@
       "type": "component",
       "repeatable": false,
       "component": "additional.community-session"
+    },
+    "questions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::community-question.community-question",
+      "mappedBy": "post"
     }
   }
 }

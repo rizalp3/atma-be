@@ -5,12 +5,15 @@ export interface AdditionalCommunitySession extends Schema.Component {
   info: {
     displayName: 'Community Session';
     icon: 'calendar';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
     date: Attribute.DateTime;
     image: Attribute.Media<'images'>;
     description: Attribute.RichText;
+    status: Attribute.Enumeration<['open', 'closed', 'answered']> &
+      Attribute.DefaultTo<'open'>;
   };
 }
 

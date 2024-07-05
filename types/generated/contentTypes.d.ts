@@ -729,6 +729,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToMany',
       'api::feed.feed'
     >;
+    questions: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToMany',
+      'api::community-question.community-question'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -924,6 +929,11 @@ export interface ApiCommunityPostCommunityPost extends Schema.CollectionType {
     content: Attribute.RichText;
     link: Attribute.String;
     session: Attribute.Component<'additional.community-session'>;
+    questions: Attribute.Relation<
+      'api::community-post.community-post',
+      'oneToMany',
+      'api::community-question.community-question'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -934,6 +944,55 @@ export interface ApiCommunityPostCommunityPost extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::community-post.community-post',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCommunityQuestionCommunityQuestion
+  extends Schema.CollectionType {
+  collectionName: 'community_questions';
+  info: {
+    singularName: 'community-question';
+    pluralName: 'community-questions';
+    displayName: 'Community Question';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    question: Attribute.String;
+    answer: Attribute.Text;
+    votes: Attribute.Relation<
+      'api::community-question.community-question',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    votesCount: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0>;
+    post: Attribute.Relation<
+      'api::community-question.community-question',
+      'manyToOne',
+      'api::community-post.community-post'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::community-question.community-question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::community-question.community-question',
       'oneToOne',
       'admin::user'
     > &
@@ -998,6 +1057,7 @@ declare module '@strapi/types' {
       'api::article-category.article-category': ApiArticleCategoryArticleCategory;
       'api::community-detail.community-detail': ApiCommunityDetailCommunityDetail;
       'api::community-post.community-post': ApiCommunityPostCommunityPost;
+      'api::community-question.community-question': ApiCommunityQuestionCommunityQuestion;
       'api::feed.feed': ApiFeedFeed;
     }
   }
