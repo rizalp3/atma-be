@@ -958,6 +958,7 @@ export interface ApiCommunityQuestionCommunityQuestion
     singularName: 'community-question';
     pluralName: 'community-questions';
     displayName: 'Community Question';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -982,6 +983,11 @@ export interface ApiCommunityQuestionCommunityQuestion
       'api::community-question.community-question',
       'manyToOne',
       'api::community-post.community-post'
+    >;
+    author: Attribute.Relation<
+      'api::community-question.community-question',
+      'oneToOne',
+      'plugin::users-permissions.user'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

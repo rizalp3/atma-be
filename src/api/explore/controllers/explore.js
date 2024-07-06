@@ -60,11 +60,6 @@ module.exports = {
 
       const likes = data?.likes || [];
 
-      console.log(
-        likes,
-        likes.some((like) => like.id === userId)
-      );
-
       if (likes.every((like) => like.id !== userId)) {
         ctx.body = data;
       } else {
