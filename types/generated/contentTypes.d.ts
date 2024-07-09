@@ -1041,6 +1041,78 @@ export interface ApiFeedFeed extends Schema.CollectionType {
   };
 }
 
+export interface ApiMoodMood extends Schema.CollectionType {
+  collectionName: 'moods';
+  info: {
+    singularName: 'mood';
+    pluralName: 'moods';
+    displayName: 'Mood';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'api::mood.mood',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    emoji: Attribute.String;
+    title: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::mood.mood', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::mood.mood', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTestResultTestResult extends Schema.CollectionType {
+  collectionName: 'test_results';
+  info: {
+    singularName: 'test-result';
+    pluralName: 'test-results';
+    displayName: 'Test Result';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'api::test-result.test-result',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    type: Attribute.Enumeration<['self', 'others']>;
+    name: Attribute.String;
+    value: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 5;
+        },
+        number
+      > &
+      Attribute.DefaultTo<1>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::test-result.test-result',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::test-result.test-result',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1065,6 +1137,8 @@ declare module '@strapi/types' {
       'api::community-post.community-post': ApiCommunityPostCommunityPost;
       'api::community-question.community-question': ApiCommunityQuestionCommunityQuestion;
       'api::feed.feed': ApiFeedFeed;
+      'api::mood.mood': ApiMoodMood;
+      'api::test-result.test-result': ApiTestResultTestResult;
     }
   }
 }
