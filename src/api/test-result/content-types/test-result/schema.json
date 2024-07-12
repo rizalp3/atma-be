@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "test_results",
+  "info": {
+    "singularName": "test-result",
+    "pluralName": "test-results",
+    "displayName": "Test Result"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "self",
+        "others"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "value": {
+      "type": "integer",
+      "min": 1,
+      "max": 5,
+      "default": 1
+    }
+  }
+}

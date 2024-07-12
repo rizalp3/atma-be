@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "community_questions",
+  "info": {
+    "singularName": "community-question",
+    "pluralName": "community-questions",
+    "displayName": "Community Question",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "question": {
+      "type": "string"
+    },
+    "answer": {
+      "type": "text"
+    },
+    "votes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "questions"
+    },
+    "votesCount": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    },
+    "post": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::community-post.community-post",
+      "inversedBy": "questions"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

@@ -2,7 +2,7 @@
   "name": "atma-be",
   "private": true,
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "description": "Atma Backend",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
@@ -22,14 +22,14 @@
     "styled-components": "5.3.3"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Rizal Purnomo"
   },
   "strapi": {
     "uuid": "dabdf8bc-e0db-4190-8278-230fbb4a8a78"
   },
   "engines": {
-    "node": ">=18.0.0 <=20.x.x",
-    "npm": ">=6.0.0"
+    "node": "20.14.x",
+    "npm": ">=10.0.0"
   },
   "license": "MIT"
 }
